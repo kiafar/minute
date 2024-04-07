@@ -1,8 +1,7 @@
-import { Link } from '@inertiajs/react';
-import React from 'react';
 import useRoute from '@/Hooks/useRoute';
 import useTypedPage from '@/Hooks/useTypedPage';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
+import React from 'react';
 
 interface Props {
   canLogin: boolean;
@@ -27,19 +26,21 @@ export default function Welcome({
       <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
         {canLogin ? (
           <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
-            <Link
-              href={route('sample')}
-              className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-            >
-              Sample
-            </Link>
             {page.props.auth.user ? (
-              <Link
-                href={route('dashboard')}
-                className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-              >
-                Dashboard
-              </Link>
+              <>
+                <Link
+                  href={route('dashboard')}
+                  className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                >
+                  Dashboard
+                </Link>
+                <Link
+                  href={route('tags.manage')}
+                  className="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                >
+                  Manage Tags
+                </Link>
+              </>
             ) : (
               <>
                 <Link
@@ -62,10 +63,39 @@ export default function Welcome({
           </div>
         ) : null}
 
-
         <div className="max-w-7xl mx-auto p-6 lg:p-8">
           <div className="flex justify-center">
-            <svg className="h-16 w-auto bg-gray-100 dark:bg-gray-900" fill="#FF2D20" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect height="1" width="12" x="10" y="3"/><rect height="1" width="12" x="10" y="3"/><rect height="1" transform="translate(-10 23) rotate(-90)" width="19" x="-3" y="16"/><rect height="1" transform="translate(11 40) rotate(-90)" width="15" x="18" y="14"/><path d="M22,3V4h2a1,1,0,0,1,1,1V7h1V5a2,2,0,0,0-2-2Z"/><path d="M10,3V4H8A1,1,0,0,0,7,5V7H6V5A2,2,0,0,1,8,3Z"/><path d="M8,30V29H8a1,1,0,0,1-1-1V26H6v2a2,2,0,0,0,2,2Z"/><path d="M21.91,21.15c-.57-.32-.91-.72-.91-1.15a6.09,6.09,0,0,1-.21,1.59c-1,4.07-6,7.18-12.12,7.4H8v1h.72c8.86-.15,16.07-3.15,17.14-7A3.77,3.77,0,0,0,26,22,8.72,8.72,0,0,1,21.91,21.15Zm-5.78,7a10.5,10.5,0,0,0,5.54-6,8.94,8.94,0,0,0,3.15.79C24.07,25,20.91,27,16.13,28.13Z"/><path d="M17,7V8H16a1,1,0,0,1-1-1V5h1V7Z"/><path d="M16,7V8h1a1,1,0,0,0,1-1V5H17V7Z"/><path d="M17,3V2H16a1,1,0,0,0-1,1V4h1V3Z"/><path d="M16,3V2h1a1,1,0,0,1,1,1V5H17V3Z"/></svg>
+            <svg
+              className="h-16 w-auto bg-gray-100 dark:bg-gray-900"
+              fill="#FF2D20"
+              viewBox="0 0 32 32"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect height="1" width="12" x="10" y="3" />
+              <rect height="1" width="12" x="10" y="3" />
+              <rect
+                height="1"
+                transform="translate(-10 23) rotate(-90)"
+                width="19"
+                x="-3"
+                y="16"
+              />
+              <rect
+                height="1"
+                transform="translate(11 40) rotate(-90)"
+                width="15"
+                x="18"
+                y="14"
+              />
+              <path d="M22,3V4h2a1,1,0,0,1,1,1V7h1V5a2,2,0,0,0-2-2Z" />
+              <path d="M10,3V4H8A1,1,0,0,0,7,5V7H6V5A2,2,0,0,1,8,3Z" />
+              <path d="M8,30V29H8a1,1,0,0,1-1-1V26H6v2a2,2,0,0,0,2,2Z" />
+              <path d="M21.91,21.15c-.57-.32-.91-.72-.91-1.15a6.09,6.09,0,0,1-.21,1.59c-1,4.07-6,7.18-12.12,7.4H8v1h.72c8.86-.15,16.07-3.15,17.14-7A3.77,3.77,0,0,0,26,22,8.72,8.72,0,0,1,21.91,21.15Zm-5.78,7a10.5,10.5,0,0,0,5.54-6,8.94,8.94,0,0,0,3.15.79C24.07,25,20.91,27,16.13,28.13Z" />
+              <path d="M17,7V8H16a1,1,0,0,1-1-1V5h1V7Z" />
+              <path d="M16,7V8h1a1,1,0,0,0,1-1V5H17V7Z" />
+              <path d="M17,3V2H16a1,1,0,0,0-1,1V4h1V3Z" />
+              <path d="M16,3V2h1a1,1,0,0,1,1,1V5H17V3Z" />
+            </svg>
           </div>
 
           <div className="mt-16">

@@ -1,0 +1,16 @@
+.tag-item-row {
+    .action-buttons {
+        visibility: hidden;
+    }
+
+    .return-sign {
+        left: -3px;
+        top: 18px;
+    }
+
+    &:hover {
+        .action-buttons {
+            visibility: visible;
+        }
+    }
+}
