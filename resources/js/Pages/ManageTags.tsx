@@ -49,7 +49,12 @@ export default function ManageTags({ tags }: Props) {
   });
 
   const modalTitle = useMemo(() => {
-    return form.data.id ? 'Edit Tag' : 'Add New Tag';
+    if (form.data.id) {
+      return `Change ${form.data.name} Name`;
+    } else {
+      const parent = tags.find(tag => tag.id === Number(form.data.parent_id));
+      return `Add New Tag ${parent ? `to ${parent.name}` : ''}`;
+    }
   }, [form.data.id]);
 
   function transformTagRecords(
@@ -118,6 +123,7 @@ export default function ManageTags({ tags }: Props) {
       createTag();
     }
   }
+
   function childNodeRemoved(node: TTreeNode) {
     toast.info(`"${node.name}" removed`, {
       containerId: 'manage-tags-toast-notif',
@@ -134,24 +140,20 @@ export default function ManageTags({ tags }: Props) {
   }
 
   function openEditTagModal(node: TTreeNode) {
-    form.data.id = node.id.toString();
-    form.data.name = node.name;
-    form.data.parent_id = '';
+    form.setData({ id: node.id.toString(), name: node.name, parent_id: '' });
     setShowEditModal(true);
   }
 
   function openAddNewTagModal(node: TTreeNode) {
     const parentId = node.id === 0 ? '' : node.id.toString();
-    form.data.parent_id = parentId;
-    form.data.id = '';
-    form.data.name = '';
+    form.setData({ id: '', name: '', parent_id: parentId });
     setShowEditModal(true);
   }
 
   function openRemoveConfirmationModal(node: TTreeNode) {
     confirmActionRef.current.show({
       confirmCallback: () => removeChildNode(node),
-      title: 'Remove the tag?',
+      title: `Remove the ${node.name} tag?`,
       message: (
         <span>
           <strong>{node.name}</strong> will be deleted permanently.
@@ -161,6 +163,7 @@ export default function ManageTags({ tags }: Props) {
   }
 
   function renderTree(nodes: TTreeNode[]): JSX.Element[] {
+    console.log('nodes', nodes);
     return nodes.map(node => (
       <div key={node.id} className={`ml-${node.level && 4}`}>
         <div className="flex items-center gap-1 tag-item-row border-l-2 hover:bg-indigo-100 hover:dark:bg-indigo-900 border-gray-200 dark:border-gray-700 pl-1 relative">
@@ -240,52 +243,33 @@ export default function ManageTags({ tags }: Props) {
                   {renderTree(nodes)}
                 </div>
 
-                <div className="text-right">
+                <div
+                  className="text-right rounded pr-1 cursor-pointer hover:bg-gray-300 hover:dark:bg-gray-700"
+                  onClick={() =>
+                    openAddNewTagModal({
+                      id: 0,
+                      name: 'rootTag',
+                      parent_id: null,
+                    })
+                  }
+                >
+                  <span className="inline-block p-1 text-xs text-gray-500 dark:text-gray-400">
+                    ADD ROOT NODE
+                  </span>
                   <FontAwesomeIcon
                     title="Add a Top Level Tag"
                     icon={faSquarePlus}
-                    onClick={() =>
-                      openAddNewTagModal({
-                        id: 0,
-                        name: 'rootTag',
-                        parent_id: null,
-                      })
-                    }
-                    className="p-1 text-gray-500 dark:text-gray-400 hover:cursor-pointer hover:bg-gray-300 hover:dark:bg-gray-700"
+                    className="text-gray-500 dark:text-gray-400 hover:cursor-pointer"
                   />
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="flex justify-center mt-16 px-6 sm:items-center sm:justify-between">
-            <div className="text-center text-sm text-gray-500 dark:text-gray-400 sm:text-left">
-              <div className="flex items-center gap-4">
-                <a
-                  href="https://github.com/sponsors/taylorotwell"
-                  className="group inline-flex items-center hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    className="-mt-px mr-1 w-5 h-5 stroke-gray-400 dark:stroke-gray-600 group-hover:stroke-gray-600 dark:group-hover:stroke-gray-400"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
-                    />
-                  </svg>
-                  Sponsor
-                </a>
-              </div>
-            </div>
-
-            <div className="ml-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:text-right sm:ml-0">
-              Laravel v11
-            </div>
+          <div className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+            <ul className="list-disc list-inside">
+              <li>Removing tags doesn't remove the notes</li>
+            </ul>
           </div>
         </div>
       </div>

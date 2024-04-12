@@ -34,4 +34,8 @@ Route::middleware([
     Route::put('/tags/{tag}', [TagController::class, 'update_tag'])->name('tags.update');
     Route::delete('/tags/{tag}', [TagController::class, 'delete_tag'])->name('tags.destroy');
     Route::get('/tags', [TagController::class, 'get_tags'])->name('tags.get');
+
+    Route::get('/addnote', function () {
+        return Inertia::render('AddNote', []);
+    })->name('note.add');
 });
