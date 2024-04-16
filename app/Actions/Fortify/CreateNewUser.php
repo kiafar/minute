@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
 
+/** This won't be called in user is registering using publickey */
 class CreateNewUser implements CreatesNewUsers
 {
     use PasswordValidationRules;

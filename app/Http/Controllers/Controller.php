@@ -20,7 +20,7 @@ abstract class Controller
      */
     function prepResponse($response)
     {
-        if (request()->inertia()){
+        if (request()->inertia()) {
             return redirect()->back()->with('responseData', $response);
         } else {
             return response()->json($response);
