@@ -1,13 +1,4 @@
 import useDebounce from './Debounce';
-import {
-  getAssertion,
-  getCredential,
-  transformCredentialCreationOptions,
-} from './Webauthn';
+import detectWebauthn from './DetectWebauthn';
 
-export {
-  getAssertion,
-  getCredential,
-  transformCredentialCreationOptions,
-  useDebounce,
-};
+export { detectWebauthn, useDebounce };

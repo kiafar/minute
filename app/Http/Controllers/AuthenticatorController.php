@@ -18,14 +18,8 @@ class AuthenticatorController extends Controller
     public function getPublicKeyCredentialCreationOptions(
         Request $request
     ): RedirectResponse|JsonResponse {
-        $request->validate([
-            'username' => ['required|string|min:3|max:64'],
-        ]);
-
         $options = (new AuthenticatorService())
-            ->getPublicKeyCredentialCreationOptions(
-                username: $request->username
-            );
+            ->getPublicKeyCredentialCreationOptions();
 
         $request->session()->put(
             AuthenticatorService::CREDENTIAL_CREATION_OPTIONS_SESSION_KEY,
@@ -45,7 +39,7 @@ class AuthenticatorController extends Controller
         Request $request,
     ): \Illuminate\Http\RedirectResponse {
         $request->validate([
-            'publicKeyCredential' => 'required|array',
+            'publicKeyCredential' => ['required', 'array'],
         ]);
 
         $service = new AuthenticatorService();

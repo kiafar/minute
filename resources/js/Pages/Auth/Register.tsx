@@ -1,144 +1,71 @@
-import AuthenticationCard from '@/Components/AuthenticationCard';
-import Checkbox from '@/Components/Checkbox';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import useRoute from '@/Hooks/useRoute';
-import useTypedPage from '@/Hooks/useTypedPage';
-import { Head, Link, useForm } from '@inertiajs/react';
-import classNames from 'classnames';
-import React, { useEffect } from 'react';
+import { Head } from '@inertiajs/react';
+import React, { useMemo, useRef, useState } from 'react';
 import { Slide, ToastContainer, toast } from 'react-toastify';
 
-// import { getCredential, transformCredentialCreationOptions } from '@/Utils';
-// import type { CredentialCreationOptions } from '@/Utils/Webauthn';
-import { startRegistration } from '@simplewebauthn/browser';
-import {
-  PublicKeyCredentialCreationOptionsJSON,
-  RegistrationResponseJSON,
-} from '@simplewebauthn/types';
+import { detectWebauthn } from '@/Utils';
+import { PublicKeyCredentialCreationOptionsJSON } from '@simplewebauthn/types';
+
+import RegisterPasswordless from './RegisterPasswordless';
+import RegisterWithPassword from './RegisterWithPassword';
 
 type RegisterProps = {
   responseData?: PublicKeyCredentialCreationOptionsJSON;
 };
 
+export type registedMethod = 'passwordless' | 'withPassword';
+
 export default function Register({ responseData }: RegisterProps) {
-  const submitCredential = (pkCredential: RegistrationResponseJSON) => {
-    form.data.publicKeyCredential = pkCredential;
-    const url = route('register.verifyPublickey');
-    form.post(url);
-  };
+  const webauthenAvailable = useRef<boolean>(true);
+  const [currentMethod, setCurrentMethod] = useState<registedMethod | 'unset'>(
+    'unset',
+  );
+  useMemo(() => {
+    detectWebauthn().then(result => {
+      webauthenAvailable.current = result;
+      setCurrentMethod(result ? 'passwordless' : 'withPassword');
+    });
+  }, []);
 
-  useEffect(() => {
-    if (responseData) {
-      startRegistration(responseData)
-        .then((pkCredential: RegistrationResponseJSON) => {
-          submitCredential(pkCredential);
-        })
-        .catch(err => {
-          const msg = err?.response?.data?.message || err;
-          console.error('Error creating credential', msg);
-          toast.error('Error creating credential');
-        });
-    }
-  }, [responseData]);
-
-  const page = useTypedPage();
-  const route = useRoute();
-  const form = useForm({
-    username: '',
-    terms: false,
-    publicKeyCredential: {},
-  });
-
-  function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    // When the user submits the form for the first time, the subsequent
-    // actions are taken care of by the Webauthn API, and useEffect will
-    // submit the credential and redirect
-    if (!responseData) {
-      // get the credential options from the server
-      form.put(route('register.getPublicKeyCredentialOptions'));
+  function changeRegisterMethod(method: registedMethod) {
+    console.log('changeRegisterMethod', method);
+    if (method === 'passwordless' && webauthenAvailable.current) {
+      setCurrentMethod('passwordless');
+    } else if (method === 'passwordless' && !webauthenAvailable.current) {
+      toast.info('Passwordless registration is not available on this device');
+    } else {
+      setCurrentMethod('withPassword');
     }
   }
 
   return (
     <>
-      <AuthenticationCard>
-        <Head title="Register" />
+      <Head title="Register" />
+      {currentMethod === 'passwordless' && (
+        <RegisterPasswordless
+          responseData={responseData}
+          changeRegisterMethod={changeRegisterMethod}
+        />
+      )}
 
-        <form onSubmit={onSubmit}>
-          <div>
-            <InputLabel htmlFor="name">Username</InputLabel>
-            <TextInput
-              id="username"
-              type="text"
-              className="mt-1 block w-full"
-              value={form.data.username}
-              onChange={e => form.setData('username', e.currentTarget.value)}
-              required
-              autoFocus
-              autoComplete="username"
-            />
-            <InputError className="mt-2" message={form.errors.username} />
-          </div>
+      {currentMethod === 'withPassword' && (
+        <RegisterWithPassword changeRegisterMethod={changeRegisterMethod} />
+      )}
 
-          {page.props.jetstream.hasTermsAndPrivacyPolicyFeature && (
-            <div className="mt-4">
-              <InputLabel htmlFor="terms">
-                <div className="flex items-center">
-                  <Checkbox
-                    name="terms"
-                    id="terms"
-                    checked={form.data.terms}
-                    onChange={e =>
-                      form.setData('terms', e.currentTarget.checked)
-                    }
-                    required
-                  />
-
-                  <div className="ml-2">
-                    I agree to the
-                    <a
-                      target="_blank"
-                      href={route('terms.show')}
-                      className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                    >
-                      Terms of Service
-                    </a>
-                    and
-                    <a
-                      target="_blank"
-                      href={route('policy.show')}
-                      className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                    >
-                      Privacy Policy
-                    </a>
-                  </div>
-                </div>
-                <InputError className="mt-2" message={form.errors.terms} />
-              </InputLabel>
+      {currentMethod === 'unset' && (
+        <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
+          <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
+            <div role="status" className="max-w-sm animate-pulse">
+              <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+              <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
+              <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+              <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
+              <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5"></div>
+              <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+              <span className="sr-only">Loading...</span>
             </div>
-          )}
-
-          <div className="flex items-center justify-end mt-4">
-            <Link
-              href={route('login')}
-              className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-            >
-              Already registered?
-            </Link>
-
-            <PrimaryButton
-              className={classNames('ml-4', { 'opacity-25': form.processing })}
-              disabled={form.processing}
-            >
-              Register
-            </PrimaryButton>
           </div>
-        </form>
-      </AuthenticationCard>
+        </div>
+      )}
 
       <ToastContainer
         autoClose={3000}

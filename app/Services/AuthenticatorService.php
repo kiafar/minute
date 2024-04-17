@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\User;
 use Cose\Algorithms;
+use GrantHolle\UsernameGenerator\Username;
 use GuzzleHttp\Psr7\ServerRequest;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -31,11 +32,11 @@ class AuthenticatorService
      *
      * @return \Webauthn\PublicKeyCredentialCreationOptions
      */
-    public function getPublicKeyCredentialCreationOptions(string $username): array
+    public function getPublicKeyCredentialCreationOptions(): array
     {
         $serializedOptions = PublicKeyCredentialCreationOptions::create(
             rp: $this->getRpEntity(),
-            user: $this->getUserEntity($username),
+            user: $this->getUserEntity(),
             challenge: $this->getChallenge(),
             pubKeyCredParams: $this->getPublicKeyCredentialParametersList(),
             authenticatorSelection: $this->getAuthenticatorSelectionCriteria(),
@@ -108,7 +109,7 @@ class AuthenticatorService
 
         $user = User::create([
             'name' => $creationOptions['user']['displayName'],
-            'username' => $creationOptions['user']['name'],
+            'username' => $publicKeyCredentialSource->userHandle,
         ]);
 
         $pkSourceService->saveCredentialSource($publicKeyCredentialSource);
@@ -124,13 +125,24 @@ class AuthenticatorService
         );
     }
 
-    private function getUserEntity(string $username): PublicKeyCredentialUserEntity
+    private function getUserEntity(): PublicKeyCredentialUserEntity
     {
+        $username = self::generateDisplayName();
         return PublicKeyCredentialUserEntity::create(
             name: $username,
             id: $this->getUserId(),
             displayName: $username
         );
+    }
+
+    public static function generateDisplayName(): string
+    {
+        return (new Username)
+            ->withAdjectiveCount(1)
+            ->withNounCount(1)
+            ->withDigitCount(2)
+            ->withCasing('studly')
+            ->generate();
     }
 
     private function getUserId(): string
@@ -147,21 +159,16 @@ class AuthenticatorService
 
     private function getPublicKeyCredentialParametersList(): array
     {
-        // Priority, from strongest to weakest
-        return [
-            PublicKeyCredentialParameters::create('public-key', Algorithms::COSE_ALGORITHM_ES256K),
-            PublicKeyCredentialParameters::create('public-key', Algorithms::COSE_ALGORITHM_ES256),
-            PublicKeyCredentialParameters::create('public-key', Algorithms::COSE_ALGORITHM_RS256),
-            PublicKeyCredentialParameters::create('public-key', Algorithms::COSE_ALGORITHM_PS256)
-        ];
+        // usernameless requires the list of allowed authenticators to be empty
+        return [];
     }
 
     private function getAuthenticatorSelectionCriteria(): AuthenticatorSelectionCriteria
     {
         return AuthenticatorSelectionCriteria::create(
             authenticatorAttachment: AuthenticatorSelectionCriteria::AUTHENTICATOR_ATTACHMENT_NO_PREFERENCE,
-            requireResidentKey: false,
-            residentKey: AuthenticatorSelectionCriteria::RESIDENT_KEY_REQUIREMENT_PREFERRED,
+            requireResidentKey: true,
+            residentKey: AuthenticatorSelectionCriteria::RESIDENT_KEY_REQUIREMENT_REQUIRED,
             userVerification: AuthenticatorSelectionCriteria::USER_VERIFICATION_REQUIREMENT_PREFERRED
         );
     }

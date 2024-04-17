@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -22,7 +23,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('email')->nullable()->change();
             $table->string('password')->nullable()->change();
-            $table->string('username')->unique();
+            $table->string('username')->after('id')->unique()->nullable();
         });
     }
 
@@ -32,6 +33,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('authenticators');
+
+        DB::table('users')->truncate();
 
         Schema::table('users', function (Blueprint $table) {
             $table->string('email')->nullable(false)->change();
