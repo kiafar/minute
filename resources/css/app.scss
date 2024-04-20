@@ -1,11 +1,9 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import './tailwind.scss';
 
-@import "react-toastify/dist/ReactToastify.css";
+@import 'react-toastify/dist/ReactToastify.css';
 
-@import "./manageTags.scss";
+@import './manageTags.scss';
 
 [x-cloak] {
-    display: none;
+  display: none;
 }
