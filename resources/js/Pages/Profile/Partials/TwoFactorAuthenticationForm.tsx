@@ -1,8 +1,3 @@
-import { router } from '@inertiajs/core';
-import { useForm } from '@inertiajs/react';
-import axios from 'axios';
-import classNames from 'classnames';
-import React, { useState } from 'react';
 import ActionSection from '@/Components/ActionSection';
 import ConfirmsPassword from '@/Components/ConfirmsPassword';
 import DangerButton from '@/Components/DangerButton';
@@ -12,6 +7,11 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
 import useTypedPage from '@/Hooks/useTypedPage';
+import { router } from '@inertiajs/core';
+import { useForm } from '@inertiajs/react';
+import axios from 'axios';
+import classNames from 'classnames';
+import React, { useState } from 'react';
 
 interface Props {
   requiresConfirmation: boolean;
@@ -187,7 +187,7 @@ export default function TwoFactorAuthenticationForm({
                     id="code"
                     type="text"
                     name="code"
-                    className="block mt-1 w-1/2"
+                    className="mt-1 block w-1/2"
                     inputMode="numeric"
                     autoFocus={true}
                     autoComplete="one-time-code"
@@ -216,7 +216,7 @@ export default function TwoFactorAuthenticationForm({
                 </p>
               </div>
 
-              <div className="grid gap-1 max-w-xl mt-4 px-4 py-4 font-mono text-sm bg-gray-100 dark:bg-gray-900 rounded-lg">
+              <div className="mt-4 grid max-w-xl gap-1 rounded-lg bg-gray-100 px-4 py-4 font-mono text-sm dark:bg-gray-900">
                 {recoveryCodes.map(code => (
                   <div key={code}>{code}</div>
                 ))}

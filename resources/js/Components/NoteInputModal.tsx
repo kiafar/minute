@@ -60,11 +60,11 @@ export default function NoteInputModal({
       <Dialog
         as="div"
         static
-        className="fixed z-10 inset-0 overflow-y-auto"
+        className="fixed inset-0 z-10 overflow-y-auto"
         open={isOpen}
         onClose={onClose}
       >
-        <div className="min-h-screen min-w-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div className="min-w-screen min-h-screen px-4 pb-20 pt-4 text-center sm:block sm:p-0">
           <Transition.Child
             as={React.Fragment}
             enter="ease-out duration-300"
@@ -74,10 +74,10 @@ export default function NoteInputModal({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0 bg-gray-500 dark:bg-gray-900 backdrop-blur-sm bg-opacity-60 dark:bg-opacity-60 transition-all" />
+            <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-60 backdrop-blur-sm transition-all dark:bg-gray-900 dark:bg-opacity-60" />
           </Transition.Child>
 
-          <div className="flex flex-col min-h-screen min-w-screen justify-end">
+          <div className="min-w-screen flex min-h-screen flex-col justify-end">
             {/* This element is to trick the browser into centering the modal contents. */}
             <Transition.Child
               as={React.Fragment}
@@ -90,7 +90,7 @@ export default function NoteInputModal({
             >
               <div
                 className={classNames(
-                  'inline-block sm:align-middle sm:w-full mb-4 ml-auto mr-4 bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all',
+                  'mb-4 ml-auto mr-4 inline-block transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all dark:bg-gray-800 sm:w-full sm:align-middle',
                   maxWidthClass,
                 )}
               >
@@ -113,7 +113,7 @@ export default function NoteInputModal({
                       'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
                   }}
                 />
-                <div className="px-4 py-2 bg-gray-100 dark:bg-gray-800 text-right">
+                <div className="bg-gray-100 px-4 py-2 text-right dark:bg-gray-800">
                   <SecondaryButton onClick={onClose}>Close</SecondaryButton>
 
                   <PrimaryButton

@@ -1,7 +1,3 @@
-import { useForm } from '@inertiajs/react';
-import classNames from 'classnames';
-import React, { useState } from 'react';
-import useRoute from '@/Hooks/useRoute';
 import ActionMessage from '@/Components/ActionMessage';
 import ActionSection from '@/Components/ActionSection';
 import Checkbox from '@/Components/Checkbox';
@@ -12,11 +8,15 @@ import FormSection from '@/Components/FormSection';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
 import SecondaryButton from '@/Components/SecondaryButton';
 import SectionBorder from '@/Components/SectionBorder';
-import { ApiToken } from '@/types';
+import TextInput from '@/Components/TextInput';
+import useRoute from '@/Hooks/useRoute';
 import useTypedPage from '@/Hooks/useTypedPage';
+import { ApiToken } from '@/types';
+import { useForm } from '@inertiajs/react';
+import classNames from 'classnames';
+import React, { useState } from 'react';
 
 interface Props {
   tokens: ApiToken[];
@@ -145,7 +145,7 @@ export default function APITokenManager({
           <div className="col-span-6">
             <InputLabel htmlFor="permissions">Permissions</InputLabel>
 
-            <div className="mt-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="mt-2 grid grid-cols-1 gap-4 md:grid-cols-2">
               {availablePermissions.map(permission => (
                 <div key={permission}>
                   <label className="flex items-center">
@@ -217,7 +217,7 @@ export default function APITokenManager({
 
                       {availablePermissions.length > 0 ? (
                         <PrimaryButton
-                          className="cursor-pointer ml-6 text-sm text-gray-400 underline"
+                          className="ml-6 cursor-pointer text-sm text-gray-400 underline"
                           onClick={() => manageApiTokenPermissions(token)}
                         >
                           Permissions
@@ -225,7 +225,7 @@ export default function APITokenManager({
                       ) : null}
 
                       <PrimaryButton
-                        className="cursor-pointer ml-6 text-sm text-red-500"
+                        className="ml-6 cursor-pointer text-sm text-red-500"
                         onClick={() => confirmApiTokenDeletion(token)}
                       >
                         Delete
@@ -250,7 +250,7 @@ export default function APITokenManager({
             again.
           </div>
 
-          <div className="mt-4 bg-gray-100 dark:bg-gray-900 px-4 py-2 rounded font-mono text-sm text-gray-500">
+          <div className="mt-4 rounded bg-gray-100 px-4 py-2 font-mono text-sm text-gray-500 dark:bg-gray-900">
             {page.props?.jetstream?.flash?.token}
           </div>
         </DialogModal.Content>
@@ -267,7 +267,7 @@ export default function APITokenManager({
         onClose={() => setManagingPermissionsFor(null)}
       >
         <DialogModal.Content title={'API Token Permissions'}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {availablePermissions.map(permission => (
               <div key={permission}>
                 <label className="flex items-center">

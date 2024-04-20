@@ -56,12 +56,12 @@ export default function RegisterPasswordless({
     <>
       <AuthenticationCard>
         <form onSubmit={onSubmit}>
-          <p className="mt-2 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+          <p className="mt-2 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
             This application registers users with secure, device-based
             authenticators.&nbsp;
           </p>
           <button
-            className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed underline text-sm cursor-pointer"
+            className="mt-4 cursor-pointer text-sm leading-relaxed text-gray-500 underline dark:text-gray-400"
             onClick={() => changeAuthMethod('withPassword')}
           >
             Register with email and password.
@@ -85,7 +85,7 @@ export default function RegisterPasswordless({
                     <a
                       target="_blank"
                       href={route('terms.show')}
-                      className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                      className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
                     >
                       Terms of Service
                     </a>
@@ -93,7 +93,7 @@ export default function RegisterPasswordless({
                     <a
                       target="_blank"
                       href={route('policy.show')}
-                      className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                      className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
                     >
                       Privacy Policy
                     </a>
@@ -104,10 +104,10 @@ export default function RegisterPasswordless({
             </div>
           )}
 
-          <div className="flex items-center justify-end mt-4">
+          <div className="mt-4 flex items-center justify-end">
             <Link
               href={route('login')}
-              className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+              className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
             >
               Already registered?
             </Link>

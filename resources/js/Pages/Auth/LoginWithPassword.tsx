@@ -39,7 +39,7 @@ export default function LoginWithPassword({
       <Head title="login" />
 
       {status && (
-        <div className="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
+        <div className="mb-4 text-sm font-medium text-green-600 dark:text-green-400">
           {status}
         </div>
       )}
@@ -88,10 +88,10 @@ export default function LoginWithPassword({
           </label>
         </div>
 
-        <div className="flex flex-col items-start mt-4">
+        <div className="mt-4 flex flex-col items-start">
           <button
             type="button"
-            className="text-gray-500 dark:text-gray-400 text-sm underline text-sm cursor-pointer"
+            className="cursor-pointer text-sm text-gray-500 underline dark:text-gray-400"
             onClick={() => changeAuthMethod('passwordless')}
           >
             Register passwordless
@@ -103,7 +103,7 @@ export default function LoginWithPassword({
             <div>
               <Link
                 href={route('password.request')}
-                className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
               >
                 Forgot your password?
               </Link>
@@ -113,7 +113,7 @@ export default function LoginWithPassword({
           <div className="flex items-center justify-end">
             <Link
               href={route('register')}
-              className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+              className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
             >
               Need an account?
             </Link>

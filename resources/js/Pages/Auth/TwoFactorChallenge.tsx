@@ -1,12 +1,12 @@
-import { useForm, Head } from '@inertiajs/react';
-import classNames from 'classnames';
-import React, { useRef, useState } from 'react';
-import useRoute from '@/Hooks/useRoute';
 import AuthenticationCard from '@/Components/AuthenticationCard';
+import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import InputError from '@/Components/InputError';
+import useRoute from '@/Hooks/useRoute';
+import { Head, useForm } from '@inertiajs/react';
+import classNames from 'classnames';
+import React, { useRef, useState } from 'react';
 
 export default function TwoFactorChallenge() {
   const route = useRoute();
@@ -84,10 +84,10 @@ export default function TwoFactorChallenge() {
           </div>
         )}
 
-        <div className="flex items-center justify-end mt-4">
+        <div className="mt-4 flex items-center justify-end">
           <button
             type="button"
-            className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 underline cursor-pointer"
+            className="cursor-pointer text-sm text-gray-600 underline hover:text-gray-900 dark:text-gray-400"
             onClick={toggleRecovery}
           >
             {recovery ? 'Use an authentication code' : 'Use a recovery code'}

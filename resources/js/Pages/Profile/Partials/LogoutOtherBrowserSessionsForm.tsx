@@ -1,15 +1,15 @@
-import { useForm } from '@inertiajs/react';
-import classNames from 'classnames';
-import React, { useRef, useState } from 'react';
-import useRoute from '@/Hooks/useRoute';
 import ActionMessage from '@/Components/ActionMessage';
 import ActionSection from '@/Components/ActionSection';
 import DialogModal from '@/Components/DialogModal';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
 import SecondaryButton from '@/Components/SecondaryButton';
+import TextInput from '@/Components/TextInput';
+import useRoute from '@/Hooks/useRoute';
 import { Session } from '@/types';
+import { useForm } from '@inertiajs/react';
+import classNames from 'classnames';
+import React, { useRef, useState } from 'react';
 
 interface Props {
   sessions: Session[];
@@ -72,7 +72,7 @@ export default function LogoutOtherBrowserSessions({ sessions }: Props) {
                     strokeWidth="2"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
-                    className="w-8 h-8 text-gray-500"
+                    className="h-8 w-8 text-gray-500"
                   >
                     <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                   </svg>
@@ -85,7 +85,7 @@ export default function LogoutOtherBrowserSessions({ sessions }: Props) {
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="w-8 h-8 text-gray-500"
+                    className="h-8 w-8 text-gray-500"
                   >
                     <path d="M0 0h24v24H0z" stroke="none"></path>
                     <rect x="7" y="4" width="10" height="16" rx="1"></rect>
@@ -103,7 +103,7 @@ export default function LogoutOtherBrowserSessions({ sessions }: Props) {
                   <div className="text-xs text-gray-500">
                     {session.ip_address},
                     {session.is_current_device ? (
-                      <span className="text-green-500 font-semibold">
+                      <span className="font-semibold text-green-500">
                         This device
                       </span>
                     ) : (
@@ -117,7 +117,7 @@ export default function LogoutOtherBrowserSessions({ sessions }: Props) {
         </div>
       ) : null}
 
-      <div className="flex items-center mt-5">
+      <div className="mt-5 flex items-center">
         <PrimaryButton onClick={confirmLogout}>
           Log Out Other Browser Sessions
         </PrimaryButton>

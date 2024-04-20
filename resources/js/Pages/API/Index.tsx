@@ -1,7 +1,7 @@
-import React from 'react';
-import APITokenManager from '@/Pages/API/Partials/APITokenManager';
 import AppLayout from '@/Layouts/AppLayout';
+import APITokenManager from '@/Pages/API/Partials/APITokenManager';
 import { ApiToken } from '@/types';
+import React from 'react';
 
 interface Props {
   tokens: ApiToken[];
@@ -18,13 +18,13 @@ export default function ApiTokenIndex({
     <AppLayout
       title={'API Tokens'}
       renderHeader={() => (
-        <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 className="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
           API Tokens
         </h2>
       )}
     >
       <div>
-        <div className="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl py-10 sm:px-6 lg:px-8">
           <APITokenManager
             tokens={tokens}
             availablePermissions={availablePermissions}

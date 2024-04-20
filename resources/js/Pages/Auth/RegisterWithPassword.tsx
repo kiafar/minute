@@ -98,7 +98,7 @@ export default function Register({
                   <a
                     target="_blank"
                     href={route('terms.show')}
-                    className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                    className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
                   >
                     Terms of Service
                   </a>
@@ -106,7 +106,7 @@ export default function Register({
                   <a
                     target="_blank"
                     href={route('policy.show')}
-                    className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                    className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
                   >
                     Privacy Policy
                   </a>
@@ -117,18 +117,18 @@ export default function Register({
           </div>
         )}
 
-        <div className="flex items-center justify-end mt-4">
+        <div className="mt-4 flex items-center justify-end">
           <button
             type="button"
-            className="text-gray-500 dark:text-gray-400 text-sm underline text-sm cursor-pointer"
+            className="cursor-pointer text-sm text-gray-500 underline dark:text-gray-400"
             onClick={() => changeAuthMethod('passwordless')}
           >
             Register passwordless
           </button>
-          <div className="text-gray-500 dark:text-gray-400 text-sm px-2">|</div>
+          <div className="px-2 text-sm text-gray-500 dark:text-gray-400">|</div>
           <Link
             href={route('login')}
-            className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+            className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
           >
             Already registered?
           </Link>

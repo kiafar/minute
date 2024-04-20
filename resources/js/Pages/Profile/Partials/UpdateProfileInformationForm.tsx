@@ -1,17 +1,17 @@
-import { router } from '@inertiajs/core';
-import { Link, useForm } from '@inertiajs/react';
-import classNames from 'classnames';
-import React, { useRef, useState } from 'react';
-import useRoute from '@/Hooks/useRoute';
 import ActionMessage from '@/Components/ActionMessage';
 import FormSection from '@/Components/FormSection';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
 import SecondaryButton from '@/Components/SecondaryButton';
-import { User } from '@/types';
+import TextInput from '@/Components/TextInput';
+import useRoute from '@/Hooks/useRoute';
 import useTypedPage from '@/Hooks/useTypedPage';
+import { User } from '@/types';
+import { router } from '@inertiajs/core';
+import { Link, useForm } from '@inertiajs/react';
+import classNames from 'classnames';
+import React, { useRef, useState } from 'react';
 
 interface Props {
   user: User;
@@ -114,7 +114,7 @@ export default function UpdateProfileInformationForm({ user }: Props) {
             // <!-- New Profile Photo Preview -->
             <div className="mt-2">
               <span
-                className="block rounded-full w-20 h-20"
+                className="block h-20 w-20 rounded-full"
                 style={{
                   backgroundSize: 'cover',
                   backgroundRepeat: 'no-repeat',
@@ -129,13 +129,13 @@ export default function UpdateProfileInformationForm({ user }: Props) {
               <img
                 src={user.profile_photo_url}
                 alt={user.name}
-                className="rounded-full h-20 w-20 object-cover"
+                className="h-20 w-20 rounded-full object-cover"
               />
             </div>
           )}
 
           <SecondaryButton
-            className="mt-2 mr-2"
+            className="mr-2 mt-2"
             type="button"
             onClick={selectNewPhoto}
           >
@@ -185,13 +185,13 @@ export default function UpdateProfileInformationForm({ user }: Props) {
         {page.props.jetstream.hasEmailVerification &&
         user.email_verified_at === null ? (
           <div>
-            <p className="text-sm mt-2 dark:text-white">
+            <p className="mt-2 text-sm dark:text-white">
               Your email address is unverified.
               <Link
                 href={route('verification.send')}
                 method="post"
                 as="button"
-                className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
                 onClick={e => {
                   e.preventDefault();
                   setVerificationLinkSent(true);
@@ -201,7 +201,7 @@ export default function UpdateProfileInformationForm({ user }: Props) {
               </Link>
             </p>
             {verificationLinkSent && (
-              <div className="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
+              <div className="mt-2 text-sm font-medium text-green-600 dark:text-green-400">
                 A new verification link has been sent to your email address.
               </div>
             )}

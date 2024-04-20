@@ -22,7 +22,7 @@ DialogModal.Footer = function DialogModalFooter({
   children,
 }: PropsWithChildren<Record<string, unknown>>) {
   return (
-    <div className="px-6 py-4 bg-gray-100 dark:bg-gray-800 text-right">
+    <div className="bg-gray-100 px-6 py-4 text-right dark:bg-gray-800">
       {children}
     </div>
   );

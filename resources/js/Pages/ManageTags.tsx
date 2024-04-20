@@ -7,7 +7,7 @@ import {
   faPenToSquare,
   faSquarePlus,
   faTrashAlt,
-} from '@fortawesome/free-regular-svg-icons';
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import ConfirmAction from '@/Components/ConfirmAction';
@@ -165,7 +165,7 @@ export default function ManageTags({ tags }: Props) {
   function renderTree(nodes: TTreeNode[]): JSX.Element[] {
     return nodes.map(node => (
       <div key={node.id} className={`ml-${node.level && 4}`}>
-        <div className="flex items-center gap-1 tag-item-row border-l-2 hover:bg-indigo-100 hover:dark:bg-indigo-900 border-gray-200 dark:border-gray-700 pl-1 relative">
+        <div className="tag-item-row relative flex items-center gap-1 border-l-2 border-slate-300 pl-1 hover:bg-indigo-100 dark:border-slate-700 hover:dark:bg-indigo-900">
           <div className="asd">#</div>
           <div>{node.name}</div>
           <div className="action-buttons ml-auto">
@@ -208,8 +208,8 @@ export default function ManageTags({ tags }: Props) {
 
       <ConfirmAction ref={confirmActionRef} />
 
-      <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 :selectiontext-white">
-        <div className="max-w-7xl mx-auto p-6 lg:p-8">
+      <div className="bg-dots-darker dark:bg-dots-lighter :selectiontext-white relative min-h-screen bg-gray-100 bg-center selection:bg-red-500 dark:bg-gray-900 sm:flex sm:items-center sm:justify-center">
+        <div className="mx-auto max-w-7xl p-6 lg:p-8">
           <div className="flex justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -233,17 +233,17 @@ export default function ManageTags({ tags }: Props) {
 
           <div className="mt-16">
             <div className="grid grid-cols-1 gap-6 lg:gap-8">
-              <div className="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none">
+              <div className="scale-100 rounded-lg bg-white from-gray-700/50 via-transparent p-6 shadow-2xl shadow-gray-500/20 dark:bg-gray-800/50 dark:bg-gradient-to-bl dark:shadow-none dark:ring-1 dark:ring-inset dark:ring-white/5">
                 <h2 className="mt-6 text-xl font-semibold text-gray-900 dark:text-white">
                   Edit Your Tags
                 </h2>
 
-                <div className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                <div className="mt-4 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
                   {renderTree(nodes)}
                 </div>
 
                 <div
-                  className="text-right rounded pr-1 cursor-pointer hover:bg-gray-300 hover:dark:bg-gray-700"
+                  className="cursor-pointer rounded pr-1 text-right hover:bg-gray-300 hover:dark:bg-gray-700"
                   onClick={() =>
                     openAddNewTagModal({
                       id: 0,
@@ -258,7 +258,7 @@ export default function ManageTags({ tags }: Props) {
                   <FontAwesomeIcon
                     title="Add a Top Level Tag"
                     icon={faSquarePlus}
-                    className="text-gray-500 dark:text-gray-400 hover:cursor-pointer"
+                    className="text-sm text-gray-500 hover:cursor-pointer dark:text-gray-400"
                   />
                 </div>
               </div>
@@ -266,7 +266,7 @@ export default function ManageTags({ tags }: Props) {
           </div>
 
           <div className="mt-4 text-sm text-gray-500 dark:text-gray-400">
-            <ul className="list-disc list-inside">
+            <ul className="list-inside list-disc">
               <li>Removing tags doesn't remove the notes</li>
             </ul>
           </div>

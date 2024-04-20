@@ -1,17 +1,17 @@
-import React from 'react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
+import React from 'react';
 
 export default function Welcome() {
   return (
     <div>
-      <div className="p-6 lg:p-8 bg-white dark:bg-gray-800 dark:bg-gradient-to-bl dark:from-gray-700/50 dark:via-transparent border-b border-gray-200 dark:border-gray-700">
+      <div className="border-b border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800 dark:bg-gradient-to-bl dark:from-gray-700/50 dark:via-transparent lg:p-8">
         <ApplicationLogo className="block h-12 w-auto" />
 
         <h1 className="mt-8 text-2xl font-medium text-gray-900 dark:text-white">
           Welcome to your Jetstream application!
         </h1>
 
-        <p className="mt-6 text-gray-500 dark:text-gray-400 leading-relaxed">
+        <p className="mt-6 leading-relaxed text-gray-500 dark:text-gray-400">
           Laravel Jetstream provides a beautiful, robust starting point for your
           next Laravel application. Laravel is designed to help you build your
           application using a development environment that is simple, powerful,
@@ -21,7 +21,7 @@ export default function Welcome() {
         </p>
       </div>
 
-      <div className="bg-gray-200 dark:bg-gray-800 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 p-6 lg:p-8">
+      <div className="grid grid-cols-1 gap-6 bg-gray-200 bg-opacity-25 p-6 dark:bg-gray-800 md:grid-cols-2 lg:gap-8 lg:p-8">
         <div>
           <div className="flex items-center">
             <svg
@@ -29,7 +29,7 @@ export default function Welcome() {
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
-              className="w-6 h-6 stroke-gray-400"
+              className="h-6 w-6 stroke-gray-400"
             >
               <path
                 strokeLinecap="round"
@@ -42,7 +42,7 @@ export default function Welcome() {
             </h2>
           </div>
 
-          <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+          <p className="mt-4 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
             Laravel has wonderful documentation covering every aspect of the
             framework. Whether you're new to the framework or have previous
             experience, we recommend reading all of the documentation from
@@ -58,7 +58,7 @@ export default function Welcome() {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
-                className="ml-1 w-5 h-5 fill-indigo-500 dark:fill-indigo-200"
+                className="ml-1 h-5 w-5 fill-indigo-500 dark:fill-indigo-200"
               >
                 <path
                   fillRule="evenodd"
@@ -77,7 +77,7 @@ export default function Welcome() {
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
-              className="w-6 h-6 stroke-gray-400"
+              className="h-6 w-6 stroke-gray-400"
             >
               <path
                 strokeLinecap="round"
@@ -89,7 +89,7 @@ export default function Welcome() {
             </h2>
           </div>
 
-          <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+          <p className="mt-4 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
             Laracasts offers thousands of video tutorials on Laravel, PHP, and
             JavaScript development. Check them out, see for yourself, and
             massively level up your development skills in the process.
@@ -104,7 +104,7 @@ export default function Welcome() {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
-                className="ml-1 w-5 h-5 fill-indigo-500 dark:fill-indigo-200"
+                className="ml-1 h-5 w-5 fill-indigo-500 dark:fill-indigo-200"
               >
                 <path
                   fillRule="evenodd"
@@ -123,7 +123,7 @@ export default function Welcome() {
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
-              className="w-6 h-6 stroke-gray-400"
+              className="h-6 w-6 stroke-gray-400"
             >
               <path
                 strokeLinecap="round"
@@ -136,7 +136,7 @@ export default function Welcome() {
             </h2>
           </div>
 
-          <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+          <p className="mt-4 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
             Laravel Jetstream is built with Tailwind, an amazing utility first
             CSS framework that doesn't get in your way. You'll be amazed how
             easily you can build and maintain fresh, modern designs with this
@@ -151,7 +151,7 @@ export default function Welcome() {
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
-              className="w-6 h-6 stroke-gray-400"
+              className="h-6 w-6 stroke-gray-400"
             >
               <path
                 strokeLinecap="round"
@@ -164,7 +164,7 @@ export default function Welcome() {
             </h2>
           </div>
 
-          <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+          <p className="mt-4 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
             Authentication and registration views are included with Laravel
             Jetstream, as well as support for user email verification and
             resetting forgotten passwords. So, you're free to get started with
