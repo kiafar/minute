@@ -1,8 +1,8 @@
 import DialogModal from '@/Components/DialogModal';
 import PrimaryButton from '@/Components/PrimaryButton';
 import SecondaryButton from '@/Components/SecondaryButton';
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Check, X } from 'lucide-react';
+
 import React, {
   forwardRef,
   useImperativeHandle,
@@ -60,7 +60,7 @@ function ConfirmAction(
 
         <DialogModal.Footer>
           <SecondaryButton onClick={() => setShowModal(false)}>
-            <FontAwesomeIcon icon={faTimes} className="pr-2" />
+            <X size={16} />
             {cancelText.current}
           </SecondaryButton>
 
@@ -69,7 +69,7 @@ function ConfirmAction(
             form="tag-form"
             onClick={handleConfirm}
           >
-            <FontAwesomeIcon icon={faCheck} className="pr-2" />
+            <Check size={16} />
             {confirmText.current}
           </PrimaryButton>
         </DialogModal.Footer>

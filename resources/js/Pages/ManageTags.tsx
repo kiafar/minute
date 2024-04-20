@@ -1,15 +1,6 @@
 import { Head, useForm } from '@inertiajs/react';
 import React, { useMemo, useRef } from 'react';
 
-import { Slide, ToastContainer, toast } from 'react-toastify';
-
-import {
-  faPenToSquare,
-  faSquarePlus,
-  faTrashAlt,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import ConfirmAction from '@/Components/ConfirmAction';
 import DialogModal from '@/Components/DialogModal';
 import InputError from '@/Components/InputError';
@@ -19,6 +10,8 @@ import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
 import useRoute from '@/Hooks/useRoute';
 import classNames from 'classnames';
+import { SquarePen, SquarePlus, Trash } from 'lucide-react';
+import { Slide, ToastContainer, toast } from 'react-toastify';
 
 type TTreeNode = {
   id: number;
@@ -168,26 +161,31 @@ export default function ManageTags({ tags }: Props) {
         <div className="tag-item-row relative flex items-center gap-1 border-l-2 border-slate-300 pl-1 hover:bg-indigo-100 dark:border-slate-700 hover:dark:bg-indigo-900">
           <div className="asd">#</div>
           <div>{node.name}</div>
-          <div className="action-buttons ml-auto">
-            <FontAwesomeIcon
+          <div className="action-buttons ml-auto flex">
+            <div
               title="Add a Child Tag"
-              icon={faSquarePlus}
               onClick={() => openAddNewTagModal(node)}
               className="p-1 hover:cursor-pointer hover:bg-gray-300 hover:dark:bg-gray-700"
-            />
-            <FontAwesomeIcon
+            >
+              <SquarePlus size={16} />
+            </div>
+
+            <div
               title="Edit Tag Name"
-              icon={faPenToSquare}
               onClick={() => openEditTagModal(node)}
               className="p-1 hover:cursor-pointer hover:bg-gray-300 hover:dark:bg-gray-700"
-            />
+            >
+              <SquarePen size={16} />
+            </div>
+
             {(!node.children || node.children.length === 0) && (
-              <FontAwesomeIcon
+              <div
                 title="Remove Tag"
                 className="p-1 hover:cursor-pointer hover:bg-gray-300 hover:dark:bg-gray-700"
-                icon={faTrashAlt}
                 onClick={() => openRemoveConfirmationModal(node)}
-              />
+              >
+                <Trash size={16} />
+              </div>
             )}
           </div>
 
@@ -243,7 +241,7 @@ export default function ManageTags({ tags }: Props) {
                 </div>
 
                 <div
-                  className="cursor-pointer rounded pr-1 text-right hover:bg-gray-300 hover:dark:bg-gray-700"
+                  className="flex cursor-pointer justify-end rounded pr-1 text-right hover:bg-gray-300 hover:dark:bg-gray-700"
                   onClick={() =>
                     openAddNewTagModal({
                       id: 0,
@@ -252,14 +250,15 @@ export default function ManageTags({ tags }: Props) {
                     })
                   }
                 >
-                  <span className="inline-block p-1 text-xs text-gray-500 dark:text-gray-400">
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
                     ADD ROOT NODE
                   </span>
-                  <FontAwesomeIcon
+                  <div
                     title="Add a Top Level Tag"
-                    icon={faSquarePlus}
-                    className="text-sm text-gray-500 hover:cursor-pointer dark:text-gray-400"
-                  />
+                    className="ml-1 text-gray-500 hover:cursor-pointer dark:text-gray-400"
+                  >
+                    <SquarePen size={16} />
+                  </div>
                 </div>
               </div>
             </div>
