@@ -7,16 +7,15 @@ import DialogModal from '@/Components/DialogModal';
 import FormSection from '@/Components/FormSection';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import SecondaryButton from '@/Components/SecondaryButton';
 import SectionBorder from '@/Components/SectionBorder';
 import TextInput from '@/Components/TextInput';
+import { Button } from '@/Components/ui/button';
 import useRoute from '@/Hooks/useRoute';
 import useTypedPage from '@/Hooks/useTypedPage';
 import { ApiToken } from '@/types';
 import { useForm } from '@inertiajs/react';
 import classNames from 'classnames';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 interface Props {
   tokens: ApiToken[];
@@ -110,14 +109,14 @@ export default function APITokenManager({
               Created.
             </ActionMessage>
 
-            <PrimaryButton
+            <Button
               className={classNames({
                 'opacity-25': createApiTokenForm.processing,
               })}
               disabled={createApiTokenForm.processing}
             >
               Create
-            </PrimaryButton>
+            </Button>
           </>
         )}
       >
@@ -216,20 +215,20 @@ export default function APITokenManager({
                       )}
 
                       {availablePermissions.length > 0 ? (
-                        <PrimaryButton
+                        <Button
                           className="ml-6 cursor-pointer text-sm text-gray-400 underline"
                           onClick={() => manageApiTokenPermissions(token)}
                         >
                           Permissions
-                        </PrimaryButton>
+                        </Button>
                       ) : null}
 
-                      <PrimaryButton
+                      <Button
                         className="ml-6 cursor-pointer text-sm text-red-500"
                         onClick={() => confirmApiTokenDeletion(token)}
                       >
                         Delete
-                      </PrimaryButton>
+                      </Button>
                     </div>
                   </div>
                 ))}
@@ -255,9 +254,9 @@ export default function APITokenManager({
           </div>
         </DialogModal.Content>
         <DialogModal.Footer>
-          <SecondaryButton onClick={() => setDisplayingToken(false)}>
+          <Button variant="secondary" onClick={() => setDisplayingToken(false)}>
             Close
-          </SecondaryButton>
+          </Button>
         </DialogModal.Footer>
       </DialogModal>
 
@@ -305,11 +304,14 @@ export default function APITokenManager({
           </div>
         </DialogModal.Content>
         <DialogModal.Footer>
-          <SecondaryButton onClick={() => setManagingPermissionsFor(null)}>
+          <Button
+            variant="secondary"
+            onClick={() => setManagingPermissionsFor(null)}
+          >
             Cancel
-          </SecondaryButton>
+          </Button>
 
-          <PrimaryButton
+          <Button
             onClick={updateApiToken}
             className={classNames('ml-2', {
               'opacity-25': updateApiTokenForm.processing,
@@ -317,7 +319,7 @@ export default function APITokenManager({
             disabled={updateApiTokenForm.processing}
           >
             Save
-          </PrimaryButton>
+          </Button>
         </DialogModal.Footer>
       </DialogModal>
 
@@ -330,9 +332,12 @@ export default function APITokenManager({
           Are you sure you would like to delete this API token?
         </ConfirmationModal.Content>
         <ConfirmationModal.Footer>
-          <SecondaryButton onClick={() => setApiTokenBeingDeleted(null)}>
+          <Button
+            variant="secondary"
+            onClick={() => setApiTokenBeingDeleted(null)}
+          >
             Cancel
-          </SecondaryButton>
+          </Button>
 
           <DangerButton
             onClick={deleteApiToken}

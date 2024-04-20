@@ -1,16 +1,16 @@
-import { Head, useForm } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
 import React, { useMemo, useRef } from 'react';
 
 import ConfirmAction from '@/Components/ConfirmAction';
 import DialogModal from '@/Components/DialogModal';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
+import { Button } from '@/Components/ui/button';
 import useRoute from '@/Hooks/useRoute';
+import AppLayout from '@/Layouts/AppLayout';
 import classNames from 'classnames';
-import { SquarePen, SquarePlus, Trash } from 'lucide-react';
+import { SquarePen, SquarePlus, Trash2 } from 'lucide-react';
 import { Slide, ToastContainer, toast } from 'react-toastify';
 
 type TTreeNode = {
@@ -184,7 +184,7 @@ export default function ManageTags({ tags }: Props) {
                 className="p-1 hover:cursor-pointer hover:bg-gray-300 hover:dark:bg-gray-700"
                 onClick={() => openRemoveConfirmationModal(node)}
               >
-                <Trash size={16} />
+                <Trash2 size={16} />
               </div>
             )}
           </div>
@@ -201,9 +201,7 @@ export default function ManageTags({ tags }: Props) {
   }
 
   return (
-    <>
-      <Head title="Manage Tags" />
-
+    <AppLayout title="Manage Tags">
       <ConfirmAction ref={confirmActionRef} />
 
       <div className="bg-dots-darker dark:bg-dots-lighter :selectiontext-white relative min-h-screen bg-gray-100 bg-center selection:bg-red-500 dark:bg-gray-900 sm:flex sm:items-center sm:justify-center">
@@ -241,7 +239,7 @@ export default function ManageTags({ tags }: Props) {
                 </div>
 
                 <div
-                  className="flex cursor-pointer justify-end rounded pr-1 text-right hover:bg-gray-300 hover:dark:bg-gray-700"
+                  className="mt-2 flex cursor-pointer justify-end rounded py-1 pr-1 text-right hover:bg-gray-300 hover:dark:bg-gray-700"
                   onClick={() =>
                     openAddNewTagModal({
                       id: 0,
@@ -257,7 +255,7 @@ export default function ManageTags({ tags }: Props) {
                     title="Add a Top Level Tag"
                     className="ml-1 text-gray-500 hover:cursor-pointer dark:text-gray-400"
                   >
-                    <SquarePen size={16} />
+                    <SquarePlus size={16} />
                   </div>
                 </div>
               </div>
@@ -316,17 +314,19 @@ export default function ManageTags({ tags }: Props) {
         </DialogModal.Content>
 
         <DialogModal.Footer>
-          <SecondaryButton onClick={dismissEditModal}>Cancel</SecondaryButton>
+          <Button variant="secondary" onClick={dismissEditModal}>
+            Cancel
+          </Button>
 
-          <PrimaryButton
+          <Button
             className={classNames('ml-2', { 'opacity-25': form.processing })}
             form="tag-form"
             disabled={form.processing}
           >
             Submit
-          </PrimaryButton>
+          </Button>
         </DialogModal.Footer>
       </DialogModal>
-    </>
+    </AppLayout>
   );
 }

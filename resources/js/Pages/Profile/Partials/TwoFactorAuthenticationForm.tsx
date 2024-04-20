@@ -3,15 +3,14 @@ import ConfirmsPassword from '@/Components/ConfirmsPassword';
 import DangerButton from '@/Components/DangerButton';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
+import { Button } from '@/Components/ui/button';
 import useTypedPage from '@/Hooks/useTypedPage';
 import { router } from '@inertiajs/core';
 import { useForm } from '@inertiajs/react';
 import axios from 'axios';
 import classNames from 'classnames';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 interface Props {
   requiresConfirmation: boolean;
@@ -231,37 +230,38 @@ export default function TwoFactorAuthenticationForm({
           <div>
             {confirming ? (
               <ConfirmsPassword onConfirm={confirmTwoFactorAuthentication}>
-                <PrimaryButton
+                <Button
                   className={classNames('mr-3', { 'opacity-25': enabling })}
                   disabled={enabling}
                 >
                   Confirm
-                </PrimaryButton>
+                </Button>
               </ConfirmsPassword>
             ) : null}
             {recoveryCodes.length > 0 && !confirming ? (
               <ConfirmsPassword onConfirm={regenerateRecoveryCodes}>
-                <SecondaryButton className="mr-3">
+                <Button variant="secondary" className="mr-3">
                   Regenerate Recovery Codes
-                </SecondaryButton>
+                </Button>
               </ConfirmsPassword>
             ) : null}
             {recoveryCodes.length === 0 && !confirming ? (
               <ConfirmsPassword onConfirm={showRecoveryCodes}>
-                <SecondaryButton className="mr-3">
+                <Button variant="secondary" className="mr-3">
                   Show Recovery Codes
-                </SecondaryButton>
+                </Button>
               </ConfirmsPassword>
             ) : null}
 
             {confirming ? (
               <ConfirmsPassword onConfirm={disableTwoFactorAuthentication}>
-                <SecondaryButton
+                <Button
+                  variant="secondary"
                   className={classNames('mr-3', { 'opacity-25': disabling })}
                   disabled={disabling}
                 >
                   Cancel
-                </SecondaryButton>
+                </Button>
               </ConfirmsPassword>
             ) : (
               <ConfirmsPassword onConfirm={disableTwoFactorAuthentication}>
@@ -277,13 +277,13 @@ export default function TwoFactorAuthenticationForm({
         ) : (
           <div>
             <ConfirmsPassword onConfirm={enableTwoFactorAuthentication}>
-              <PrimaryButton
+              <Button
                 type="button"
                 className={classNames({ 'opacity-25': enabling })}
                 disabled={enabling}
               >
                 Enable
-              </PrimaryButton>
+              </Button>
             </ConfirmsPassword>
           </div>
         )}

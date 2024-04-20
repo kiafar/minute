@@ -1,5 +1,5 @@
 import AuthenticationCard from '@/Components/AuthenticationCard';
-import PrimaryButton from '@/Components/PrimaryButton';
+import { Button } from '@/Components/ui/button';
 import useRoute from '@/Hooks/useRoute';
 import { Head, Link, useForm } from '@inertiajs/react';
 import classNames from 'classnames';
@@ -38,12 +38,12 @@ export default function VerifyEmail({ status }: Props) {
 
       <form onSubmit={onSubmit}>
         <div className="mt-4 flex items-center justify-between">
-          <PrimaryButton
+          <Button
             className={classNames({ 'opacity-25': form.processing })}
             disabled={form.processing}
           >
             Resend Verification Email
-          </PrimaryButton>
+          </Button>
 
           <div>
             <Link

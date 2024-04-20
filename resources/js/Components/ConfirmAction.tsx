@@ -1,6 +1,5 @@
 import DialogModal from '@/Components/DialogModal';
-import PrimaryButton from '@/Components/PrimaryButton';
-import SecondaryButton from '@/Components/SecondaryButton';
+import { Button } from '@/Components/ui/button';
 import { Check, X } from 'lucide-react';
 
 import React, {
@@ -59,19 +58,15 @@ function ConfirmAction(
         </DialogModal.Content>
 
         <DialogModal.Footer>
-          <SecondaryButton onClick={() => setShowModal(false)}>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
             <X size={16} />
             {cancelText.current}
-          </SecondaryButton>
+          </Button>
 
-          <PrimaryButton
-            className="ml-2"
-            form="tag-form"
-            onClick={handleConfirm}
-          >
+          <Button className="ml-2" form="tag-form" onClick={handleConfirm}>
             <Check size={16} />
             {confirmText.current}
-          </PrimaryButton>
+          </Button>
         </DialogModal.Footer>
       </DialogModal>
     </>

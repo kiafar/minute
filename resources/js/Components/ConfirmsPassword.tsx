@@ -1,12 +1,11 @@
 import DialogModal from '@/Components/DialogModal';
 import InputError from '@/Components/InputError';
-import PrimaryButton from '@/Components/PrimaryButton';
-import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
+import { Button } from '@/Components/ui/button';
 import useRoute from '@/Hooks/useRoute';
 import axios from 'axios';
 import classNames from 'classnames';
-import React, { PropsWithChildren, useRef, useState } from 'react';
+import { PropsWithChildren, useRef, useState } from 'react';
 
 interface Props {
   title?: string;
@@ -94,15 +93,17 @@ export default function ConfirmsPassword({
         </DialogModal.Content>
 
         <DialogModal.Footer>
-          <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
+          <Button variant="secondary" onClick={closeModal}>
+            Cancel
+          </Button>
 
-          <PrimaryButton
+          <Button
             className={classNames('ml-2', { 'opacity-25': form.processing })}
             onClick={confirmPassword}
             disabled={form.processing}
           >
             {button}
-          </PrimaryButton>
+          </Button>
         </DialogModal.Footer>
       </DialogModal>
     </span>

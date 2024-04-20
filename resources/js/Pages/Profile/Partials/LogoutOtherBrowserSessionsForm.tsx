@@ -2,14 +2,13 @@ import ActionMessage from '@/Components/ActionMessage';
 import ActionSection from '@/Components/ActionSection';
 import DialogModal from '@/Components/DialogModal';
 import InputError from '@/Components/InputError';
-import PrimaryButton from '@/Components/PrimaryButton';
-import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
+import { Button } from '@/Components/ui/button';
 import useRoute from '@/Hooks/useRoute';
 import { Session } from '@/types';
 import { useForm } from '@inertiajs/react';
 import classNames from 'classnames';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 interface Props {
   sessions: Session[];
@@ -118,9 +117,7 @@ export default function LogoutOtherBrowserSessions({ sessions }: Props) {
       ) : null}
 
       <div className="mt-5 flex items-center">
-        <PrimaryButton onClick={confirmLogout}>
-          Log Out Other Browser Sessions
-        </PrimaryButton>
+        <Button onClick={confirmLogout}>Log Out Other Browser Sessions</Button>
 
         <ActionMessage on={form.recentlySuccessful} className="ml-3">
           Done.
@@ -147,15 +144,17 @@ export default function LogoutOtherBrowserSessions({ sessions }: Props) {
         </DialogModal.Content>
 
         <DialogModal.Footer>
-          <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
+          <Button variant="secondary" onClick={closeModal}>
+            Cancel
+          </Button>
 
-          <PrimaryButton
+          <Button
             onClick={logoutOtherBrowserSessions}
             className={classNames('ml-2', { 'opacity-25': form.processing })}
             disabled={form.processing}
           >
             Log Out Other Browser Sessions
-          </PrimaryButton>
+          </Button>
         </DialogModal.Footer>
       </DialogModal>
     </ActionSection>

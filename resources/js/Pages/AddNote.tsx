@@ -1,11 +1,9 @@
-import { Head } from '@inertiajs/react';
-import React from 'react';
-
-import { Slide, ToastContainer } from 'react-toastify';
-
 import NoteInputModal from '@/Components/NoteInputModal';
-import PrimaryButton from '@/Components/PrimaryButton';
+import { Button } from '@/Components/ui/button';
+import AppLayout from '@/Layouts/AppLayout';
 import classNames from 'classnames';
+import React from 'react';
+import { Slide, ToastContainer } from 'react-toastify';
 
 type Props = {};
 
@@ -21,17 +19,15 @@ export default function AddNote({}: Props) {
   };
 
   return (
-    <>
-      <Head title="Add Note" />
-
-      <PrimaryButton
+    <AppLayout title="Add Note">
+      <Button
         className={classNames('ml-2', { 'opacity-25': false })}
         form="tag-form"
         disabled={false}
         onClick={() => setShowEditModal(true)}
       >
         Submit
-      </PrimaryButton>
+      </Button>
 
       <ToastContainer
         autoClose={3000}
@@ -50,6 +46,6 @@ export default function AddNote({}: Props) {
         onClose={dismissEditModal}
         onSubmit={log}
       />
-    </>
+    </AppLayout>
   );
 }

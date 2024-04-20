@@ -2,7 +2,7 @@ import AuthenticationCard from '@/Components/AuthenticationCard';
 import Checkbox from '@/Components/Checkbox';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
+import { Button } from '@/Components/ui/button';
 import useRoute from '@/Hooks/useRoute';
 import useTypedPage from '@/Hooks/useTypedPage';
 import { Link, useForm } from '@inertiajs/react';
@@ -112,14 +112,14 @@ export default function RegisterPasswordless({
               Already registered?
             </Link>
 
-            <PrimaryButton
+            <Button
               className={classNames('ml-4', {
                 'opacity-25': form.processing,
               })}
               disabled={form.processing}
             >
               Register
-            </PrimaryButton>
+            </Button>
           </div>
         </form>
       </AuthenticationCard>

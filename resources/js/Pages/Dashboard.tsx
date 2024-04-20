@@ -1,6 +1,5 @@
 import Welcome from '@/Components/Welcome';
 import AppLayout from '@/Layouts/AppLayout';
-import React from 'react';
 
 export default function Dashboard() {
   return (

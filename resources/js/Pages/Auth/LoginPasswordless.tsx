@@ -1,5 +1,5 @@
 import AuthenticationCard from '@/Components/AuthenticationCard';
-import PrimaryButton from '@/Components/PrimaryButton';
+import { Button } from '@/Components/ui/button';
 import useRoute from '@/Hooks/useRoute';
 import { Link, useForm } from '@inertiajs/react';
 import { startAuthentication } from '@simplewebauthn/browser';
@@ -66,14 +66,14 @@ export default function LoginPasswordless({
               Need an account?
             </Link>
 
-            <PrimaryButton
+            <Button
               className={classNames('ml-4', {
                 'opacity-25': form.processing,
               })}
               disabled={form.processing}
             >
               Login
-            </PrimaryButton>
+            </Button>
           </div>
         </form>
       </AuthenticationCard>

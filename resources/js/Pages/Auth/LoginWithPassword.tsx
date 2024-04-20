@@ -2,8 +2,8 @@ import AuthenticationCard from '@/Components/AuthenticationCard';
 import Checkbox from '@/Components/Checkbox';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
+import { Button } from '@/Components/ui/button';
 import useRoute from '@/Hooks/useRoute';
 import { Head, Link, useForm } from '@inertiajs/react';
 import classNames from 'classnames';
@@ -118,12 +118,12 @@ export default function LoginWithPassword({
               Need an account?
             </Link>
 
-            <PrimaryButton
+            <Button
               className={classNames('ml-4', { 'opacity-25': form.processing })}
               disabled={form.processing}
             >
               Log in
-            </PrimaryButton>
+            </Button>
           </div>
         </div>
       </form>

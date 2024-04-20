@@ -1,10 +1,8 @@
+import { Button } from '@/Components/ui/button';
 import { Dialog, Transition } from '@headlessui/react';
 import classNames from 'classnames';
 import React, { useRef } from 'react';
 import ReactDOM from 'react-dom';
-
-import PrimaryButton from '@/Components/PrimaryButton';
-import SecondaryButton from '@/Components/SecondaryButton';
 import 'tinymce/tinymce';
 
 import 'tinymce/icons/default';
@@ -61,7 +59,6 @@ export default function NoteInputModal({
         as="div"
         static
         className="fixed inset-0 z-10 overflow-y-auto"
-        open={isOpen}
         onClose={onClose}
       >
         <div className="min-w-screen min-h-screen px-4 pb-20 pt-4 text-center sm:block sm:p-0">
@@ -97,6 +94,7 @@ export default function NoteInputModal({
                 <Editor
                   onInit={(evt, editor) => (editorRef.current = editor)}
                   initialValue={defaultContents}
+                  licenseKey="gpl"
                   init={{
                     height: 500,
                     menubar: false,
@@ -114,16 +112,18 @@ export default function NoteInputModal({
                   }}
                 />
                 <div className="bg-gray-100 px-4 py-2 text-right dark:bg-gray-800">
-                  <SecondaryButton onClick={onClose}>Close</SecondaryButton>
+                  <Button variant="secondary" onClick={onClose}>
+                    Close
+                  </Button>
 
-                  <PrimaryButton
+                  <Button
                     className={classNames('ml-2', { 'opacity-25': false })}
                     form="tag-form"
                     disabled={false}
                     onClick={submit}
                   >
                     Save
-                  </PrimaryButton>
+                  </Button>
                 </div>
               </div>
             </Transition.Child>

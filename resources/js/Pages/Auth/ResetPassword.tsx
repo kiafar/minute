@@ -1,8 +1,8 @@
 import AuthenticationCard from '@/Components/AuthenticationCard';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
+import { Button } from '@/Components/ui/button';
 import useRoute from '@/Hooks/useRoute';
 import { Head, useForm } from '@inertiajs/react';
 import classNames from 'classnames';
@@ -84,12 +84,12 @@ export default function ResetPassword({ token, email }: Props) {
         </div>
 
         <div className="mt-4 flex items-center justify-end">
-          <PrimaryButton
+          <Button
             className={classNames({ 'opacity-25': form.processing })}
             disabled={form.processing}
           >
             Reset Password
-          </PrimaryButton>
+          </Button>
         </div>
       </form>
     </AuthenticationCard>

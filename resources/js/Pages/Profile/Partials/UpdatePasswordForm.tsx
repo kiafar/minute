@@ -2,12 +2,12 @@ import ActionMessage from '@/Components/ActionMessage';
 import FormSection from '@/Components/FormSection';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
+import { Button } from '@/Components/ui/button';
 import useRoute from '@/Hooks/useRoute';
 import { useForm } from '@inertiajs/react';
 import classNames from 'classnames';
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 
 export default function UpdatePasswordForm() {
   const route = useRoute();
@@ -51,12 +51,12 @@ export default function UpdatePasswordForm() {
             Saved.
           </ActionMessage>
 
-          <PrimaryButton
+          <Button
             className={classNames({ 'opacity-25': form.processing })}
             disabled={form.processing}
           >
             Save
-          </PrimaryButton>
+          </Button>
         </>
       )}
     >

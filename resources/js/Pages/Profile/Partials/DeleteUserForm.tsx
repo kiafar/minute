@@ -2,12 +2,12 @@ import ActionSection from '@/Components/ActionSection';
 import DangerButton from '@/Components/DangerButton';
 import DialogModal from '@/Components/DialogModal';
 import InputError from '@/Components/InputError';
-import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
+import { Button } from '@/Components/ui/button';
 import useRoute from '@/Hooks/useRoute';
 import { useForm } from '@inertiajs/react';
 import classNames from 'classnames';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 export default function DeleteUserForm() {
   const route = useRoute();
@@ -74,7 +74,9 @@ export default function DeleteUserForm() {
           </div>
         </DialogModal.Content>
         <DialogModal.Footer>
-          <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
+          <Button variant="secondary" onClick={closeModal}>
+            Cancel
+          </Button>
 
           <DangerButton
             onClick={deleteUser}

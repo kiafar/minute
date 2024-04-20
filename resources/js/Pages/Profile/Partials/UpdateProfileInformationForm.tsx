@@ -2,16 +2,15 @@ import ActionMessage from '@/Components/ActionMessage';
 import FormSection from '@/Components/FormSection';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
+import { Button } from '@/Components/ui/button';
 import useRoute from '@/Hooks/useRoute';
 import useTypedPage from '@/Hooks/useTypedPage';
 import { User } from '@/types';
 import { router } from '@inertiajs/core';
 import { Link, useForm } from '@inertiajs/react';
 import classNames from 'classnames';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 interface Props {
   user: User;
@@ -88,12 +87,12 @@ export default function UpdateProfileInformationForm({ user }: Props) {
             Saved.
           </ActionMessage>
 
-          <PrimaryButton
+          <Button
             className={classNames({ 'opacity-25': form.processing })}
             disabled={form.processing}
           >
             Save
-          </PrimaryButton>
+          </Button>
         </>
       )}
     >
@@ -134,22 +133,24 @@ export default function UpdateProfileInformationForm({ user }: Props) {
             </div>
           )}
 
-          <SecondaryButton
+          <Button
+            variant="secondary"
             className="mr-2 mt-2"
             type="button"
             onClick={selectNewPhoto}
           >
             Select A New Photo
-          </SecondaryButton>
+          </Button>
 
           {user.profile_photo_path ? (
-            <SecondaryButton
+            <Button
+              variant="secondary"
               type="button"
               className="mt-2"
               onClick={deletePhoto}
             >
               Remove Photo
-            </SecondaryButton>
+            </Button>
           ) : null}
 
           <InputError message={form.errors.photo} className="mt-2" />
