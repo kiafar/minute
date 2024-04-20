@@ -3,8 +3,8 @@ import './bootstrap';
 import { RouteContext } from '@/Hooks/useRoute';
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { ThemeProvider } from './ThemeProvider';
 
 const appName =
   window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
@@ -23,7 +23,9 @@ createInertiaApp({
     const root = createRoot(el);
     return root.render(
       <RouteContext.Provider value={(window as any).route}>
-        <App {...props} />
+        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+          <App {...props} />
+        </ThemeProvider>
       </RouteContext.Provider>,
     );
   },

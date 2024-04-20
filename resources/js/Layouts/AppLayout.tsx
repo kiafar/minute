@@ -4,6 +4,7 @@ import Dropdown from '@/Components/Dropdown';
 import DropdownLink from '@/Components/DropdownLink';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
+import ThemeModeToggle from '@/Components/ThemeModeToggle';
 import useRoute from '@/Hooks/useRoute';
 import useTypedPage from '@/Hooks/useTypedPage';
 import { Team } from '@/types';
@@ -209,8 +210,9 @@ export default function AppLayout({
                     }
                   >
                     {/* <!-- Account Management --> */}
-                    <div className="block px-4 py-2 text-xs text-gray-400">
-                      Manage Account
+                    <div className="flex justify-between px-4 py-2 text-xs text-gray-400">
+                      <div className="mt-auto">Manage Account</div>
+                      <ThemeModeToggle />
                     </div>
 
                     <DropdownLink href={route('profile.show')}>
