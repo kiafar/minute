@@ -6,26 +6,17 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import useRoute from '@/Hooks/useRoute';
 import useTypedPage from '@/Hooks/useTypedPage';
 import { Link, useForm } from '@inertiajs/react';
+import { startRegistration } from '@simplewebauthn/browser';
+import type { RegistrationResponseJSON } from '@simplewebauthn/types';
 import classNames from 'classnames';
 import React, { useEffect } from 'react';
 import { Slide, ToastContainer, toast } from 'react-toastify';
-import type { registedMethod } from './Register';
-
-import { startRegistration } from '@simplewebauthn/browser';
-import type {
-  PublicKeyCredentialCreationOptionsJSON,
-  RegistrationResponseJSON,
-} from '@simplewebauthn/types';
-
-type RegisterProps = {
-  changeRegisterMethod: (method: registedMethod) => void;
-  responseData?: PublicKeyCredentialCreationOptionsJSON;
-};
+import { RegisterPasswordlessProps } from './types';
 
 export default function RegisterPasswordless({
-  changeRegisterMethod,
+  changeAuthMethod,
   responseData,
-}: RegisterProps) {
+}: RegisterPasswordlessProps) {
   const submitCredential = (pkCredential: RegistrationResponseJSON) => {
     form.data.publicKeyCredential = pkCredential;
     const url = route('register.verifyPublickey');
@@ -71,7 +62,7 @@ export default function RegisterPasswordless({
           </p>
           <button
             className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed underline text-sm cursor-pointer"
-            onClick={() => changeRegisterMethod('withPassword')}
+            onClick={() => changeAuthMethod('withPassword')}
           >
             Register with email and password.
           </button>

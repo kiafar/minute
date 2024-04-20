@@ -15,13 +15,21 @@ Route::get('/', function () {
     ]);
 });
 
-Route::prefix('register')->group(function () {
-    Route::put('/', [
+Route::prefix('auth')->group(function () {
+    Route::put('login', [
+        AuthenticatorController::class, 'getPublicKeyRequestOptions'
+    ])->name('login.getPublicKeyCredentialOptions');
+
+    Route::post('login/verify_publickey', [
+        AuthenticatorController::class, 'validateLoginAttestationResponse'
+    ])->name('login.verifyAttestation');
+
+    Route::put('register', [
         AuthenticatorController::class, 'getPublicKeyCredentialCreationOptions'
     ])->name('register.getPublicKeyCredentialOptions');
 
-    Route::post('/verify_publickey', [
-        AuthenticatorController::class, 'validatePublicKey'
+    Route::post('register/verify_publickey', [
+        AuthenticatorController::class, 'validateRegisterationPublicKey'
     ])->name('register.verifyPublickey');
 })->middleware(['guest:' . config('fortify.guard')]);
 

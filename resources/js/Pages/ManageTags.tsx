@@ -163,7 +163,6 @@ export default function ManageTags({ tags }: Props) {
   }
 
   function renderTree(nodes: TTreeNode[]): JSX.Element[] {
-    console.log('nodes', nodes);
     return nodes.map(node => (
       <div key={node.id} className={`ml-${node.level && 4}`}>
         <div className="flex items-center gap-1 tag-item-row border-l-2 hover:bg-indigo-100 hover:dark:bg-indigo-900 border-gray-200 dark:border-gray-700 pl-1 relative">

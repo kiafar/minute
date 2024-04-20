@@ -9,13 +9,11 @@ import useTypedPage from '@/Hooks/useTypedPage';
 import { Link, useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React from 'react';
-import type { registedMethod } from './Register';
+import type { RegisterWithPasswordProps } from './types';
 
-type RegisterProps = {
-  changeRegisterMethod: (method: registedMethod) => void;
-};
-
-export default function Register({ changeRegisterMethod }: RegisterProps) {
+export default function Register({
+  changeAuthMethod,
+}: RegisterWithPasswordProps) {
   const page = useTypedPage();
   const route = useRoute();
   const form = useForm({
@@ -26,7 +24,6 @@ export default function Register({ changeRegisterMethod }: RegisterProps) {
   });
 
   function onSubmit(e: React.FormEvent) {
-    console.log('onSubmitWithPassword');
     e.preventDefault();
     form.post(route('register'), {
       onFinish: () => form.reset('password', 'password_confirmation'),
@@ -124,7 +121,7 @@ export default function Register({ changeRegisterMethod }: RegisterProps) {
           <button
             type="button"
             className="text-gray-500 dark:text-gray-400 text-sm underline text-sm cursor-pointer"
-            onClick={() => changeRegisterMethod('passwordless')}
+            onClick={() => changeAuthMethod('passwordless')}
           >
             Register passwordless
           </button>

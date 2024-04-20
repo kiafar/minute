@@ -22,10 +22,9 @@ class AuthenticatorController extends Controller
             ->getPublicKeyCredentialCreationOptions();
 
         $request->session()->put(
-            AuthenticatorService::CREDENTIAL_CREATION_OPTIONS_SESSION_KEY,
+            AuthenticatorService::CRED_CREATION_OPTS_SESSION_KEY,
             $options
         );
-
         return $this->prepResponse($options);
     }
 
@@ -35,7 +34,7 @@ class AuthenticatorController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function validatePublicKey(
+    public function validateRegisterationPublicKey(
         Request $request,
     ): \Illuminate\Http\RedirectResponse {
         $request->validate([
@@ -43,8 +42,40 @@ class AuthenticatorController extends Controller
         ]);
 
         $service = new AuthenticatorService();
+        $user = $service->validateRegistrationPublicKeyCredential(
+            $request->publicKeyCredential
+        );
 
-        $user = $service->validatePublicKeyCredential($request->publicKeyCredential);
+        auth()->login($user);
+
+        return redirect()->route('dashboard');
+    }
+
+    public function getPublicKeyRequestOptions(
+        Request $request
+    ): RedirectResponse|JsonResponse {
+        $options = (new AuthenticatorService())
+            ->getPublicKeyCredentialRequestOptions();
+
+        $request->session()->put(
+            AuthenticatorService::CRED_REQUEST_OPTS_SESSION_KEY,
+            $options
+        );
+
+        return $this->prepResponse($options);
+    }
+
+    public function validateLoginAttestationResponse(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        $request->validate([
+            'attestationResponse' => ['required', 'array'],
+        ]);
+
+        $service = new AuthenticatorService();
+
+        $user = $service->validateLoginAttestationResponse(
+            $request->attestationResponse
+        );
 
         auth()->login($user);
 

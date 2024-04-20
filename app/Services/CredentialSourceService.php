@@ -8,6 +8,7 @@ use Webauthn\PublicKeyCredentialSource;
 use Webauthn\PublicKeyCredentialSourceRepository;
 use Webauthn\PublicKeyCredentialUserEntity;
 
+/** A repository service to find and store user credentials in DB */
 class CredentialSourceService implements PublicKeyCredentialSourceRepository
 {
     public function findOneByCredentialId(string $publicKeyCredentialId): ?PublicKeyCredentialSource

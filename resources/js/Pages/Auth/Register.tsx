@@ -1,24 +1,17 @@
+import { detectWebauthn } from '@/Utils';
 import { Head } from '@inertiajs/react';
 import React, { useMemo, useRef, useState } from 'react';
 import { Slide, ToastContainer, toast } from 'react-toastify';
-
-import { detectWebauthn } from '@/Utils';
-import { PublicKeyCredentialCreationOptionsJSON } from '@simplewebauthn/types';
-
 import RegisterPasswordless from './RegisterPasswordless';
 import RegisterWithPassword from './RegisterWithPassword';
-
-type RegisterProps = {
-  responseData?: PublicKeyCredentialCreationOptionsJSON;
-};
-
-export type registedMethod = 'passwordless' | 'withPassword';
+import type { AuthMethod, RegisterProps } from './types';
 
 export default function Register({ responseData }: RegisterProps) {
   const webauthenAvailable = useRef<boolean>(true);
-  const [currentMethod, setCurrentMethod] = useState<registedMethod | 'unset'>(
+  const [currentMethod, setCurrentMethod] = useState<AuthMethod | 'unset'>(
     'unset',
   );
+
   useMemo(() => {
     detectWebauthn().then(result => {
       webauthenAvailable.current = result;
@@ -26,8 +19,7 @@ export default function Register({ responseData }: RegisterProps) {
     });
   }, []);
 
-  function changeRegisterMethod(method: registedMethod) {
-    console.log('changeRegisterMethod', method);
+  function changeAuthMethod(method: AuthMethod) {
     if (method === 'passwordless' && webauthenAvailable.current) {
       setCurrentMethod('passwordless');
     } else if (method === 'passwordless' && !webauthenAvailable.current) {
@@ -43,12 +35,12 @@ export default function Register({ responseData }: RegisterProps) {
       {currentMethod === 'passwordless' && (
         <RegisterPasswordless
           responseData={responseData}
-          changeRegisterMethod={changeRegisterMethod}
+          changeAuthMethod={changeAuthMethod}
         />
       )}
 
       {currentMethod === 'withPassword' && (
-        <RegisterWithPassword changeRegisterMethod={changeRegisterMethod} />
+        <RegisterWithPassword changeAuthMethod={changeAuthMethod} />
       )}
 
       {currentMethod === 'unset' && (
